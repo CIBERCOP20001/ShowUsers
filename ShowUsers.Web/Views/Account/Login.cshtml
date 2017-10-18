@@ -8,7 +8,7 @@
 @using (Html.BeginForm("Login", "Account", 
     new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", id = "form-login", role = "form" }))
 {
-    if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+    if (!ViewData.ModelState.IsValid)
     {
         <div class="alert alert-danger alert-dismissible fade in">
             <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>

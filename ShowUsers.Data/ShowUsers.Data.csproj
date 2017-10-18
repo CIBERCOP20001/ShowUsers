@@ -43,11 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AccountRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShowUsers.Interface\ShowUsers.Interface.csproj">
+      <Project>{1fd0383e-f3ba-44f9-b7e5-d36118a5b365}</Project>
+      <Name>ShowUsers.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShowUsers.Model\ShowUsers.Model.csproj">
+      <Project>{E424A931-634D-434B-BA28-EF1B66B576AC}</Project>
+      <Name>ShowUsers.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
