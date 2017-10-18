@@ -233,6 +233,14 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ShowUsers.Data\ShowUsers.Data.csproj">
+      <Project>{092b3f81-9fe3-495a-bfbc-c8135ef67b3a}</Project>
+      <Name>ShowUsers.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShowUsers.Interface\ShowUsers.Interface.csproj">
+      <Project>{1fd0383e-f3ba-44f9-b7e5-d36118a5b365}</Project>
+      <Name>ShowUsers.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShowUsers.Model\ShowUsers.Model.csproj">
       <Project>{e424a931-634d-434b-ba28-ef1b66b576ac}</Project>
       <Name>ShowUsers.Model</Name>
