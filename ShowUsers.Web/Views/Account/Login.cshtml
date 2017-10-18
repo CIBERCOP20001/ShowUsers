@@ -1,0 +1,60 @@
+﻿@using ShowUsers.Model.Models
+@model Login
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@using (Html.BeginForm("Login", "Account", 
+    new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", id = "form-login", role = "form" }))
+{
+    if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+            @Html.ValidationSummary("The username or password you entered is incorrect.")
+        </div>
+    }
+
+    <div class="panel panel-primary div-center" style="height:250px; width:400px" >
+        <div class="panel-heading text-center">Log in users</div>
+        <div class="panel-body" style="padding-top:40px">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.LoginUser, new { @class = "form-control", @placeholder = "Username", required = "true", data_parsley_required_message = "The field is required." })
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", autocomplete = "off", required = "true", data_parsley_required_message = "The field is required." })
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <div class="col-xs-12">
+                        <button id="btnLogin" class="btn btn-primary w-md waves-effect waves-light" type="submit" value="Log in">Log In</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+@section footerscripts {
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+    <!-- Parsleyjs -->
+    <script src="~/Scripts/Plugins/Parsley/parsley.min.js"></script>
+    <script src="~/Scripts/pages/main-login.js"></script>
+
+}
+
+
+
+
