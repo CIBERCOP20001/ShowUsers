@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Web", "ShowUsers.Web\ShowUsers.Web.csproj", "{A8F21781-E472-49E3-829E-564F49841EE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Data", "..\..\ShowUsers\ShowUsers.Data\ShowUsers.Data.csproj", "{092B3F81-9FE3-495A-BFBC-C8135EF67B3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Data", "ShowUsers.Data\ShowUsers.Data.csproj", "{092B3F81-9FE3-495A-BFBC-C8135EF67B3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Interface", "..\..\ShowUsers\ShowUsers.Interface\ShowUsers.Interface.csproj", "{1FD0383E-F3BA-44F9-B7E5-D36118A5B365}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Interface", "ShowUsers.Interface\ShowUsers.Interface.csproj", "{1FD0383E-F3BA-44F9-B7E5-D36118A5B365}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Model", "..\..\ShowUsers\ShowUsers.Model\ShowUsers.Model.csproj", "{E424A931-634D-434B-BA28-EF1B66B576AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Model", "ShowUsers.Model\ShowUsers.Model.csproj", "{E424A931-634D-434B-BA28-EF1B66B576AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Utility", "..\..\ShowUsers\ShowUsers.Utility\ShowUsers.Utility.csproj", "{9352E9F4-9107-46AC-B12D-765B9A41CE5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Utility", "ShowUsers.Utility\ShowUsers.Utility.csproj", "{9352E9F4-9107-46AC-B12D-765B9A41CE5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowUsers.Web", "..\..\ShowUsers\ShowUsers.Web\ShowUsers.Web.csproj", "{A8F21781-E472-49E3-829E-564F49841EE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A8F21781-E472-49E3-829E-564F49841EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8F21781-E472-49E3-829E-564F49841EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8F21781-E472-49E3-829E-564F49841EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8F21781-E472-49E3-829E-564F49841EE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{092B3F81-9FE3-495A-BFBC-C8135EF67B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{092B3F81-9FE3-495A-BFBC-C8135EF67B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{092B3F81-9FE3-495A-BFBC-C8135EF67B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{9352E9F4-9107-46AC-B12D-765B9A41CE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9352E9F4-9107-46AC-B12D-765B9A41CE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9352E9F4-9107-46AC-B12D-765B9A41CE5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F21781-E472-49E3-829E-564F49841EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F21781-E472-49E3-829E-564F49841EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F21781-E472-49E3-829E-564F49841EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F21781-E472-49E3-829E-564F49841EE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
