@@ -61,4 +61,7 @@
   <ItemGroup>
     <PreDeploy Include="BuildDB.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployment.sql" />
+  </ItemGroup>
 </Project>
