@@ -10,9 +10,21 @@ namespace ShowUsers.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var logged = (Session["Logged"] != null) ? Convert.ToBoolean(Session["Logged"]) : false;
+            if (logged)
+            {
+                ViewBag.Title = "Show App Users";
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Account");
         }
 
+        public ActionResult Logout()
+        {
+            Session["Logged"] = false;
+            return RedirectToAction("Login", "Account");
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

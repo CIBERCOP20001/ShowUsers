@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShowUsers.Model;
+using ShowUsers.Model.Custom;
+using ShowUsers.Model.ViewModels;
 
 namespace ShowUsers.Interface
 {
     public interface IAccountRepository
     {
         bool ValidateLogin(ShowUsers.Model.Models.Login login);
+        AppUserDataTableViewModel GetAppUsersList(JQueryDatatableParamModel param);
     }
 }

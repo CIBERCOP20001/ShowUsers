@@ -29,3 +29,75 @@ BEGIN
 	) ON [PRIMARY]
 
 END
+GO
+
+CREATE PROCEDURE [dbo].[spValidateLogin]
+	-- Add the parameters for the stored procedure here
+	@LoginUser NVARCHAR(50),
+	@LoginPassword NVARCHAR(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT
+      CASE WHEN EXISTS 
+      (
+            SELECT Id
+			FROM [dbo].[Users_AntonioAvendano]
+			WHERE UserName = @LoginUser 
+			AND Password = @LoginPassword
+			AND Active = 1
+      )
+      THEN 'TRUE'
+      ELSE 'FALSE'
+   END
+
+END
+
+GO
+
+ALTER PROCEDURE spGetAppUsersList
+	-- Add the parameters for the stored procedure here
+	@DisplayLength INT = 10,
+	@DisplayStart INT = 0,
+	@SortOrder NVARCHAR(4) = 'ASC',
+	@SortCol INT = 1
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	DECLARE @SortFull NVARCHAR(30)
+	SET @SortFull = CAST(@SortCol AS NVARCHAR(1)) + ' ' + UPPER(@SortOrder) 
+    -- Insert statements for procedure here
+	SELECT 
+		Id,
+		UserName,
+		Password,
+		Email,
+		Gender,
+		CASE WHEN Active = 1 THEN 'True' ELSE 'False' END Active
+	FROM [dbo].[Users_AntonioAvendano]
+	ORDER BY
+		CASE WHEN @SortFull = '1 ASC' THEN UserName END ASC,
+		CASE WHEN @SortFull = '1 DESC' THEN UserName END DESC,
+		CASE WHEN @SortFull = '2 ASC' THEN Password  END ASC,
+		CASE WHEN @SortFull = '2 DESC' THEN Password  END DESC,
+		CASE WHEN @SortFull = '3 ASC' THEN Email  END ASC,
+		CASE WHEN @SortFull = '3 DESC' THEN Email  END DESC,
+		CASE WHEN @SortFull = '4 ASC' THEN Gender  END ASC,
+		CASE WHEN @SortFull = '4 DESC' THEN Gender  END DESC,
+		CASE WHEN @SortFull = '5 ASC' THEN Active  END ASC,
+		CASE WHEN @SortFull = '5 DESC' THEN Active  END DESC
+	OFFSET @DisplayStart ROWS
+	FETCH NEXT @DisplayLength ROWS ONLY;
+
+	SELECT COUNT(1) AppUsersTotal
+	FROM [dbo].[Users_AntonioAvendano]
+	
+END
+GO

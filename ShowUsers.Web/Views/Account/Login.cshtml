@@ -12,7 +12,7 @@
     {
         <div class="alert alert-danger alert-dismissible fade in">
             <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
-            @Html.ValidationSummary("The username or password you entered is incorrect.")
+            @Html.ValidationSummary("The username or password you entered is incorrect or user is inactive")
         </div>
     }
 
@@ -49,9 +49,6 @@
 }
 @section footerscripts {
     <script src="~/Scripts/jquery-3.2.1.js"></script>
-    <!-- Parsleyjs -->
-    <script src="~/Scripts/Plugins/Parsley/parsley.min.js"></script>
-    <script src="~/Scripts/pages/main-login.js"></script>
 
 }
 

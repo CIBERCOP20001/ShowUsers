@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ShowUsers.Utility
 {
-    public class Class1
+    public class Constants
     {
+        public const string dbConnectionName = "ShowAppUsersDB";
     }
 }
