@@ -55,10 +55,10 @@ Home Index
                 $('[data-id="btnstatus"]').on('click', function(e) {
                     var me = $(this);
                     e.preventDefault();
-                    var appUserId = $(this).attr('data-appuserid');
+                    var appUserEmail = $(this).attr('data-appuseremail');
                     var appUserStatus = $(this).attr('data-appuserstatus');
                     //alert(appUserId + appUserStatus);
-                    $this.updateUserStatus(appUserId, appUserStatus);
+                    $this.updateUserStatus(appUserEmail, appUserStatus);
                 });
             },
             "aoColumns": [
@@ -73,9 +73,9 @@ Home Index
                     "mRender": function(data, type, row) {
                         var res = "";
                         if (row[5] == 'True') {
-                            res = '<a href="#" data-id="btnstatus"  style="width:100px" class="btn btn-xs btn-danger waves-effect waves-light m-l-10" data-appuserid="' + row[0] + '" data-appuserstatus="' + row[5] + '"> Deactivate </a>';
+                            res = '<a href="#" data-id="btnstatus"  style="width:100px" class="btn btn-xs btn-danger waves-effect waves-light m-l-10" data-appuseremail="' + row[3] + '" data-appuserstatus="' + row[5] + '"> Deactivate </a>';
                         } else {
-                            res = '<a href="#" data-id="btnstatus" style="width:100px" class="btn btn-xs btn-success waves-effect waves-light m-l-10" data-appuserid="' + row[0] + '" data-appuserstatus="' + row[5] + '"> Activate </a>';
+                            res = '<a href="#" data-id="btnstatus" style="width:100px" class="btn btn-xs btn-success waves-effect waves-light m-l-10" data-appuseremail="' + row[3] + '" data-appuserstatus="' + row[5] + '"> Activate </a>';
                         }
                         return res;
                     }
@@ -84,16 +84,27 @@ Home Index
         });
     },
 
-        Home.prototype.updateUserStatus = function(userid, status) {
+        Home.prototype.updateUserStatus = function(email, status) {
             var $this = this;
             $.ajax({
                 url: url.updateUserStatus,
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ userid: userid, status: status }),
+                data: JSON.stringify({ email: email, status: status }),
                 cache: false,
                 success: function(data, textStatus, jqXHR) {
-                   
+                    $('#appuserstbl tr:contains("' + email + '") >td').last().prev().html(data.newStatus);
+                    if (data.newStatus == 'True') {
+                        $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').removeClass('btn-success');
+                        $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').addClass('btn-danger');
+                        $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').html("Deactivate");
+                    }
+                    else {
+                        $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').removeClass('btn-danger');
+                        $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').addClass('btn-success');
+                        $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').html("Activate");
+                    }
+                    $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').attr('data-appuserstatus', data.newStatus);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
 
