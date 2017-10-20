@@ -2,14 +2,15 @@
 Home Index
 */
 
-!function($) {
+!function ($) {
     "use strict";
 
-    var Home = function() {
+    var Home = function () {
         this.$dataTable = $('#appuserstbl');
+        this.$btnCreateUser = $('#btnCreateUser');
     };
 
-    Home.prototype.loadAppUsers = function() {
+    Home.prototype.loadAppUsers = function () {
         var $this = this;
         var dataTable = this.$dataTable.DataTable({
             "responsive": true,
@@ -22,9 +23,9 @@ Home Index
             "scrollX": false,
             "bLengthChange": false,
             "sAjaxSource": url.getAppUsers,
-            "fnServerData": function(sSource, aoData, fnCallback, oSettings) {
+            "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
                 oSettings.jqXHR = $.ajax({
-                    beforeSend: function(xhr) {
+                    beforeSend: function (xhr) {
                         xhr.setRequestHeader("__RequestVerificationToken", $this.$token);
                     },
                     "dataType": 'json',
@@ -32,27 +33,27 @@ Home Index
                     "url": sSource,
                     "data": aoData,
                     "success": fnCallback,
-                    "error": function(xhr, textStatus, error) {
+                    "error": function (xhr, textStatus, error) {
                         alert(xhr.resonseText);
                     },
-                    "complete": function() {
+                    "complete": function () {
 
                     },
                 });
             },
-            "fnServerParams": function(aoData) {
+            "fnServerParams": function (aoData) {
             },
             "bProcessing": false,
             "bFilter": false,
             "sPaginationType": "full_numbers",
-            "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 return nRow;
             },
-            "fnPreDrawCallback": function() {
+            "fnPreDrawCallback": function () {
             },
-            "fnDrawCallback": function(oSettings) {
+            "fnDrawCallback": function (oSettings) {
                 // button to Edit the tt
-                $('[data-id="btnstatus"]').on('click', function(e) {
+                $('[data-id="btnstatus"]').on('click', function (e) {
                     var me = $(this);
                     e.preventDefault();
                     var appUserEmail = $(this).attr('data-appuseremail');
@@ -70,7 +71,7 @@ Home Index
                 { "sName": "Active", "bSortable": true, "sClass": "dt-body-center" },
                 {
                     "bSortable": false,
-                    "mRender": function(data, type, row) {
+                    "mRender": function (data, type, row) {
                         var res = "";
                         if (row[5] == 'True') {
                             res = '<a href="#" data-id="btnstatus"  style="width:100px" class="btn btn-xs btn-danger waves-effect waves-light m-l-10" data-appuseremail="' + row[3] + '" data-appuserstatus="' + row[5] + '"> Deactivate </a>';
@@ -84,7 +85,7 @@ Home Index
         });
     },
 
-        Home.prototype.updateUserStatus = function(email, status) {
+        Home.prototype.updateUserStatus = function (email, status) {
             var $this = this;
             $.ajax({
                 url: url.updateUserStatus,
@@ -92,7 +93,7 @@ Home Index
                 contentType: 'application/json',
                 data: JSON.stringify({ email: email, status: status }),
                 cache: false,
-                success: function(data, textStatus, jqXHR) {
+                success: function (data, textStatus, jqXHR) {
                     $('#appuserstbl tr:contains("' + email + '") >td').last().prev().html(data.newStatus);
                     if (data.newStatus == 'True') {
                         $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').removeClass('btn-success');
@@ -106,18 +107,58 @@ Home Index
                     }
                     $('#appuserstbl tr:contains("' + email + '") >td').last().find('a').attr('data-appuserstatus', data.newStatus);
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-
-                },
-                complete: function() {
-
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Error in process");
                 }
             });
         },
 
-        Home.prototype.start = function() {
+        Home.prototype.insertNewUser = function (data) {
             var $this = this;
+            $.ajax({
+                url: url.createUser,
+                type: 'POST',
+                dataType: 'json',
+                data: data,
+                cache: false,
+                success: function (data, textStatus, jqXHR) {
+                    if (data.msg == true) {
+                        $this.loadAppUsers();
+                        swal({
+                            title: "Done!",
+                            text: "New user was inserted OK",
+                            icon: "success",
+                            button: "OK",
+                            closeOnConfirm: true
+                        });
+                        $('#form-createuser').trigger("reset");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Error in process");
+                }
+            });
+        },
+
+        Home.prototype.createUser = function () {
+            var $this = this;
+            if ($('#form-createuser').parsley().validate()) {
+                var formData = $('#form-createuser').serializeArray();
+                if (!$('#chkActive').is(':checked')) {
+                    formData.push({ name :'Active', value :'false' });
+                }
+                $this.insertNewUser(formData);
+            }
+        },
+
+        Home.prototype.start = function () {
+            var $this = this;
+            // Fill the users table
             $this.loadAppUsers();
+            // Save user
+            this.$btnCreateUser.click(function (e) {
+                $this.createUser();
+            });
         }
 
     //init
@@ -125,7 +166,7 @@ Home Index
 }(window.jQuery),
 
     //initializing
-    function($) {
+    function ($) {
         "use strict";
         $.Home.start();
     }(window.jQuery);

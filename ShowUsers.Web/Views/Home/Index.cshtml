@@ -6,31 +6,99 @@
     <script type="text/javascript">
         var url = {
             getAppUsers: '@Url.Content("~/Account/GetAppUsers")/',
-            updateUserStatus : '@Url.Content("~/Account/UpdateUserStatus")/'
+            updateUserStatus: '@Url.Content("~/Account/UpdateUserStatus")/',
+            createUser: '@Url.Content("~/Account/CreateUser")/'
         };
     </script>
     <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/DataTables/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/parsley.css" rel="stylesheet" />
 }
 <div class="content">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <table id="appuserstbl" class="table table-bordered table-condensed table-striped">
-                    <thead>
-                        <tr> 
-                            <td>id</td>
-                            <td>User Name</td>
-                            <td>Password</td>
-                            <td>Email</td>
-                            <td>Gender</td>
-                            <td>Active</td>
-                            <td>Activate/Deactivate</td>
-                        </tr>
-                    </thead>
+            <form id="form-createuser">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">Create New Users</h3></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Username</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="UserName" value="" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Password</label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" name="Password" value="" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Email</label>
+                                        <div class="col-md-9">
+                                            <input type="email" class="form-control" name="Email" value="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Gender</label>
+                                        <div class="col-md-9">
+                                            <select class="form-control" id="ddlGender" name="Gender">
+                                                <option selected="selected" value="M">M</option>
+                                                <option value="F">F</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Account Status</label>
+                                        <div class="col-md-9">
+                                            <div class="checkbox checkbox-primary">
+                                                <input type="checkbox" style="margin-left:0px;" id="chkActive" name="Active" class="status" checked="checked" value="1">
+                                                <label for="chbActive"> Active </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center" style="padding-top:20px;">
+                            <button id="btnCreateUser" type="button" class="btn btn-success waves-effect waves-light">Create User</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-                </table>
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h3 class="panel-title">Users Catalog</h3></div>
+                <div class="panel-body">
+                    <table id="appuserstbl" class="table table-bordered table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>User Name</td>
+                                <td>Password</td>
+                                <td>Email</td>
+                                <td>Gender</td>
+                                <td>Status</td>
+                                <td>Activate/Deactivate</td>
+                            </tr>
+                        </thead>
+
+                    </table>
+                    <div class="panel-body">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -42,6 +110,8 @@
     <script src="~/Scripts/Plugins/DataTables/dataTables.responsive.min.js"></script>
     <script src="~/Scripts/Plugins/DataTables/responsive.bootstrap.min.js"></script>
     <script src="~/Scripts/Plugins/DataTables/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Scripts/Plugins/Parsley/parsley.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="~/Scripts/Pages/home.js"></script>
 }

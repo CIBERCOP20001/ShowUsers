@@ -86,5 +86,14 @@ namespace ShowUsers.Web.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult CreateUser(AppUser appuser)
+        {
+            bool inserted = _accountRepo.CreateUser(appuser);
+
+            var result = new { msg = inserted };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
