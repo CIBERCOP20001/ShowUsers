@@ -18,6 +18,35 @@ namespace ShowUsers.Data
     {
         string connString = Utility.Common.GetConnectionString();
 
+        public bool CreateUser(AppUser appuser)
+        {
+            bool status = true;
+            int result = 0;
+            try
+            {
+                using (var conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    result = conn.Query<int>("spInsertNewUser",
+                               new
+                               {
+                                   Email = appuser.Email,
+                                   Gender = appuser.Gender,
+                                   Password = appuser.Password,
+                                   UserName = appuser.UserName,
+                                   Active = appuser.Active
+                               },
+                        commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    status = (result > 0) ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+            }
+            return status;
+        }
+
         public AppUserDataTableViewModel GetAppUsersList(JQueryDatatableParamModel param)
         {
             AppUserDataTableViewModel data = new AppUserDataTableViewModel();
