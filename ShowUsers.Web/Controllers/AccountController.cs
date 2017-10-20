@@ -78,9 +78,11 @@ namespace ShowUsers.Web.Controllers
             return json;
         }
 
-        public JsonResult UpdateUserStatus()
+        public JsonResult UpdateUserStatus(string email, bool status)
         {
-            var result = new { newStatus = "Yes" };
+            string newStatus = _accountRepo.UpdateUserStatus(email, !status);
+
+            var result = new { newStatus = newStatus };
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

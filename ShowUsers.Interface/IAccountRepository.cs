@@ -13,5 +13,6 @@ namespace ShowUsers.Interface
     {
         bool ValidateLogin(ShowUsers.Model.Models.Login login);
         AppUserDataTableViewModel GetAppUsersList(JQueryDatatableParamModel param);
+        string UpdateUserStatus(string username, bool v);
     }
 }

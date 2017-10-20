@@ -52,6 +52,32 @@ namespace ShowUsers.Data
             return data;
         }
 
+        public string UpdateUserStatus(string email, bool newStatus)
+        {
+            string status = string.Empty;
+            int result = 0;
+            try
+            {
+                using (var conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    result = conn.Query<int>("spUpdateUserStatus",
+                               new
+                               {
+                                   Email = email,
+                                   Status = Convert.ToByte(newStatus)
+                               },
+                        commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    status = (result > 0) ? newStatus.ToString() : "Fail";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = "Fail";
+            }
+            return status;
+        }
+
         public bool ValidateLogin(Login login)
         {
             bool isValid = true;
